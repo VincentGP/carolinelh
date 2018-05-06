@@ -1,8 +1,10 @@
 <template>
     <div id="welcome-section">
-        <div id="canvas">
-            <img id="logo" src="../assets/logo.svg">
-        </div>
+        <router-link to="/coming-soon">
+          <div id="canvas">
+              <img id="logo" src="../assets/logo.svg">
+          </div>
+        </router-link>
         <transition name="fade" mode="out-in">
           <p id="messages" :key="currentMessage">
             {{ currentMessage }}
@@ -13,30 +15,31 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       messages: ['Velkommen', 'Welcome', 'Wilkommen', 'Benvenuto', 'Bienvenido'],
-      currentMessage: ''
+      currentMessage: '',
+      speed: 2000
     }
   },
-  created () {
-    this.currentMessage = this.messages[0]
-    this.changeMessage()
+  created() {
+    this.currentMessage = this.messages[0];
+    this.changeMessage();
   },
   methods: {
-    changeMessage () {
-      let counter = 0
-      let length = this.messages.length
+    changeMessage() {
+      let counter = 0;
+      let length = this.messages.length;
       setInterval(() => {
         if (counter === length) {
-          counter = 0
+          counter = 0;
         }
-        this.currentMessage = this.messages[counter]
-        counter++
-      }, 2000)
+        this.currentMessage = this.messages[counter];
+        counter++;
+      }, this.speed);
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -48,8 +51,11 @@ export default {
   width: 100%;
   height: 100vh;
 }
-#logo {
+#canvas {
   width: 300px;
+  height: 300px;
+  background-image: url('../assets/welcome.gif');
+  background-size: cover;
 }
 #messages {
   letter-spacing: 0.7px;
